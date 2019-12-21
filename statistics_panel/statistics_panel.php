@@ -24,6 +24,10 @@ if ( ! defined("IN_FUSION")) { die("Access Denied"); }
 openside('Statistieken');
 
 echo THEME_BULLET . ' Actieve Leden: ' . dbcount("(user_id)", DB_USERS, "user_status ='0'") . '<br />' . "\n";
+
+$month_ago = strtotime( '-1 month', time() );
+echo THEME_BULLET . ' Actief deze maand: ' . dbcount("(user_id)", DB_USERS, "user_lastvisit > '" . $month_ago . "'") . '<br />' . "\n";
+
 echo THEME_BULLET . ' Gebande Leden: ' . dbcount("(user_id)", DB_USERS, "user_status ='1'") . '<br />' . "\n";
 echo THEME_BULLET . ' Gedeactiveerde leden: ' . dbcount("(user_id)", DB_USERS, "user_status ='7'") . '<br />' . "\n";
 //echo THEME_BULLET . ' Meest actief: ' . $mostactive['username'] . " (" . $mostactive['posts'] . ")" . '<br />' . "\n";
@@ -32,8 +36,5 @@ echo THEME_BULLET . ' Shouts: ' . dbcount("(shout_id)", DB_SHOUTBOX) . '<br />' 
 echo THEME_BULLET . ' Topics: ' . dbcount("(thread_id)", DB_FORUM_THREADS) . '<br />' . "\n";
 echo THEME_BULLET . ' Berichten: ' . dbcount("(post_id)", DB_FORUM_POSTS) . '<br />' . "\n";
 echo THEME_BULLET . ' Foto&apos;s: ' . dbcount("(photo_id)", DB_PHOTOS) . '<br />' . "\n";
-
-$month_ago = strtotime( '-1 month', time() );
-echo THEME_BULLET . ' Actief deze maand: ' . dbcount("(user_id)", DB_USERS, "user_lastvisit > '" . $month_ago . "'") . '<br />' . "\n";
 
 closeside();
